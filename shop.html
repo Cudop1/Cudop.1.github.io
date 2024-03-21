@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Online Shop</title>
+    <link rel="stylesheet" href="shop.css">
+  
+    
+</head>
+<body>
+    <header>
+        <h1>Kunst und kauf</h1>
+        <button onclick="toggleCart()">Cart</button>
+    </header>
+    <div class="container">
+        <div class="product">
+            <h2>Bild 1</h2>
+            <p>300000 fr.</p>
+            <button onclick="addToCart('Product 1', 300000)">Einkaufswagen</button>
+        </div>
+        <div class="product">
+            <h2>Bild 2</h2>
+            <p>150000 fr.</p>
+            <button onclick="addToCart('Product 2', 150000)">Einkaufswagen</button>
+        </div>
+        <div class="product">
+            <h2>Bild 3</h2>
+            <p>20000 fr.</p>
+            <button onclick="addToCart('Product 3', 20000)">Einkaufswagen</button>
+        </div>
+    </div>
+    <div class="cart" id="cart">
+        <h2>Einkaufswagen</h2>
+        <ul id="cartItems"></ul>
+        <p>Total: fr.<span id="totalPrice">0</span></p>
+    </div>
+    <script>
+        let cart = [];
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            displayCart();
+        }
+        function displayCart() {
+            let cartItems = document.getElementById('cartItems');
+            let totalPrice = document.getElementById('totalPrice');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            totalPrice.textContent = total;
+        }
+        function toggleCart() {
+            let cart = document.getElementById('cart');
+            cart.style.display = (cart.style.display === 'none' || cart.style.display === '') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
